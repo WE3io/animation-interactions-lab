@@ -1,0 +1,80 @@
+---
+import type {
+  PinMode,
+  StackedCardItem,
+  StackedCardsAnimationOptions
+} from "./types";
+import "./stacked-cards.css";
+
+export interface Props {
+  id?: string;
+  title?: string;
+  cards: StackedCardItem[];
+  animation?: Partial<StackedCardsAnimationOptions>;
+  pinMode?: PinMode;
+  class?: string;
+}
+
+const {
+  id,
+  title,
+  cards,
+  animation,
+  pinMode = "gsap",
+  class: className = ""
+} = Astro.props;
+
+if (!cards?.length) {
+  throw new Error("StackedCardsSection requires at least one card.");
+}
+
+const sectionId = id ?? `stacked-cards-${crypto.randomUUID()}`;
+const options = JSON.stringify({ animation, pinMode });
+---
+
+<section
+  id={sectionId}
+  class={`stacked-cards ${className}`.trim()}
+  data-stacked-cards-root
+  data-stacked-cards-options={options}
+  data-stacked-cards-pin-mode={pinMode}
+>
+  {title && <h2 class="stacked-cards__title">{title}</h2>}
+
+  <div class="stacked-cards__layout">
+    <aside class="stacked-cards__pinned" data-stacked-cards-pinned>
+      <div class="stacked-cards__pinned-inner">
+        <slot name="pinned">
+          <p>This content stays visible while cards animate on larger screens.</p>
+        </slot>
+      </div>
+    </aside>
+
+    <div class="stacked-cards__cards">
+      <div class="stacked-cards__track" data-stacked-cards-track>
+        {
+          cards.map((card) => (
+            <article class="stacked-cards__card" data-stacked-cards-card data-card-id={card.id}>
+              <h3 class="stacked-cards__card-title">{card.title}</h3>
+              {card.body && <p class="stacked-cards__card-body">{card.body}</p>}
+              {card.imageSrc && (
+                <img
+                  class="stacked-cards__card-image"
+                  src={card.imageSrc}
+                  alt={card.imageAlt ?? ""}
+                  loading="lazy"
+                />
+              )}
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { bootStackedCards } from "./boot";
+
+  bootStackedCards();
+</script>

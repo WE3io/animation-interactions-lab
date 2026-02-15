@@ -1,0 +1,116 @@
+.stacked-cards {
+  --stack-gap: clamp(1rem, 2vw, 2rem);
+  --pin-top: clamp(1rem, 3vw, 3rem);
+  --card-width: min(100%, 28rem);
+  --card-min-height: 13rem;
+  --surface: #f8fafc;
+  --surface-border: #cbd5e1;
+  --surface-text: #0f172a;
+
+  margin-block: clamp(3rem, 8vw, 8rem);
+}
+
+.stacked-cards__title {
+  margin: 0 0 clamp(1rem, 2vw, 1.5rem);
+  color: #111827;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  line-height: 1.2;
+}
+
+.stacked-cards__layout {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: start;
+  grid-template-columns: minmax(13rem, 22rem) minmax(0, 1fr);
+}
+
+.stacked-cards__pinned {
+  position: sticky;
+  top: var(--pin-top);
+}
+
+.stacked-cards[data-stacked-cards-pin-mode="gsap"] .stacked-cards__pinned {
+  position: static;
+  top: auto;
+}
+
+.stacked-cards__pinned-inner {
+  min-height: 16rem;
+  background: var(--surface);
+  color: var(--surface-text);
+  border: 1px solid var(--surface-border);
+  border-radius: 0.75rem;
+  padding: clamp(1rem, 2vw, 1.5rem);
+}
+
+.stacked-cards__cards {
+  min-height: max(26rem, 55vh);
+}
+
+.stacked-cards__track {
+  display: grid;
+  margin-top: clamp(0.25rem, 1.5vw, 1rem);
+}
+
+.stacked-cards__track > * {
+  grid-area: 1 / 1;
+}
+
+.stacked-cards__card {
+  width: var(--card-width);
+  min-height: var(--card-min-height);
+  background: var(--surface);
+  color: var(--surface-text);
+  border: 1px solid var(--surface-border);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.08);
+}
+
+.stacked-cards__card-title {
+  margin: 0 0 0.65rem;
+  font-size: 1.1rem;
+}
+
+.stacked-cards__card-body {
+  margin: 0;
+  line-height: 1.45;
+}
+
+.stacked-cards__card-image {
+  width: 100%;
+  border-radius: 0.5rem;
+  margin-top: 0.9rem;
+}
+
+@media (max-width: 900px) {
+  .stacked-cards__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .stacked-cards__pinned {
+    position: static;
+  }
+
+  .stacked-cards__cards {
+    min-height: auto;
+  }
+
+  .stacked-cards__track {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stacked-cards__track {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .stacked-cards__card {
+    transform: none !important;
+  }
+}
