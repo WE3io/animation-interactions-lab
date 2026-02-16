@@ -1,8 +1,15 @@
+# Package dependencies and related
 node_modules/
-.astro/
-dist/
 .pnpm-store/
+pnpm-debug.log*
+
+# Build output
+dist/
+.astro/
+
+# Test output
 playwright-report/
 test-results/
-pnpm-debug.log*
+
+# OS metadata
 .DS_Store

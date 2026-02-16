@@ -3,7 +3,7 @@
 <table style="background-color: #F4EAD0;color: #29004B;">
   <tr>
     <td width="132" style="border:none; background-color: #F4EAD0;" valign="middle">
-      <a href="https://we3.io"><img src="https://we3.io/favicon.ico" alt="WE3io" width="40" /></a>
+      <a href="https://we3.io"><img src="./assets/WE3io-logo-200px.png" alt="WE3io" width="40" /></a>
     </td>
     <td style="border:none; background-color: #F4EAD0;">
       <strong>WE3</strong> builds products and companies with senior Product, Design, and Engineering teams. This repository is part of our open-source community offerings. <a href="https://we3.io/brief">Start your brief</a>.
